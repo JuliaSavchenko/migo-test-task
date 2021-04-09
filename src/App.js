@@ -1,9 +1,9 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 import MatrixDrawer from './components/MatrixDrawer.jsx';
 import Menu from './components/Menu.jsx';
 import './App.css';
 import { Container } from '@material-ui/core';
-import {createMatrix, colorFieldsInMatrix} from './algorithm/matrixFunctions.js';
+import { createMatrix, colorFieldsInMatrix } from './algorithm/matrixFunctions.js';
 
 
 function App() {
@@ -13,7 +13,7 @@ function App() {
 
   const calculateMatrix = () => {
     setMatrix(createMatrix(count));
-  }; 
+  };
 
   const colorFieldsForValue = () => {
     setMatrix(colorFieldsInMatrix(matrix, 1));
@@ -21,10 +21,12 @@ function App() {
 
   return (
     <Container>
-        <Menu 
-            onCountChanged={(value) => setCount(value)} 
+        <Menu
+            onCountChanged={(value) => setCount(value)}
             onCreateClicked={() => calculateMatrix()}
             onFillClicked={() => colorFieldsForValue()}
+            isFillEnabled={matrix && matrix.length > 0}
+            isCreationEnabled={count > 0}
         />
         <MatrixDrawer matrix={matrix} />
     </Container> 
